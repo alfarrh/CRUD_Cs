@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,7 +19,17 @@ namespace Projeto_Teste.src.control
             this._db = TestView.db;
         }
         
-        public void Create(string name, string lastName, string documento, string endereco, int idade, string telefone, DateTime dataNasc)
+        //Create
+        public void Create
+            (
+                string name,
+                string lastName,
+                string documento,
+                string endereco,
+                int idade,
+                string telefone,
+                DateTime dataNasc
+            )
         {
             Person pessoa = new Person(name, lastName, documento, endereco, idade, telefone, dataNasc);
 
@@ -39,15 +50,44 @@ namespace Projeto_Teste.src.control
             }
 
         }
+
         //Read
         public Person Find(int id)
         {
-            return _db.FindById(id);
-        }
-        //Update
-        //Delete
+            Person person = _db.FindById(id);
 
-        public List<Person> Index()
+            if (person == null) throw new Exception("Pessoa não cadastrada.");
+            else return person;
+        }
+
+        //Update
+        public void Update
+            (
+                int id,
+                string name,
+                string lastName,
+                string documento,
+                string endereco,
+                int idade,
+                string telefone,
+                DateTime dataNasc
+            )
+        {
+            Person person = new Person(name,lastName, documento, endereco,idade, telefone,dataNasc);
+
+            person.Id = id;
+
+            _db.Update(person);
+        }
+        
+        //Delete
+        public void Delete( int id )
+        {
+            _db.Delete(id);
+        }
+
+        //List
+            public List<Person> Index()
         {
             try
             {

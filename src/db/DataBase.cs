@@ -52,7 +52,7 @@ namespace Projeto_Teste.src.db
             }
         }
 
-        public Person Update(Person person)
+        public void Update(Person person)
         {
             if (Data.Count == 0) { throw new Exception("Ainda não existem registros."); }
 
@@ -60,13 +60,10 @@ namespace Projeto_Teste.src.db
             {
                 int index = Data.FindIndex(r => r.Id == person.Id);
                 Data[index] = person;
-
-                return person;
             }
             catch
             {
-                Console.WriteLine("Pessoa não cadastrada.");
-                return null;
+                throw new Exception("Pessoa não cadastrada.");
             }
 
         }

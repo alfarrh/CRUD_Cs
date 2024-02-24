@@ -43,7 +43,15 @@ namespace Projeto_Teste.src.view
             while (it)
             {
                 Console.Clear();
-                Console.WriteLine("MENU\n[1] - Cadastrar\n[2] - Listar\n[8] - Init\n[9] - Sair");
+                Console.WriteLine(
+                    "MENU" +
+                    "\n[1] - Consultar" +
+                    "\n[2] - Cadastrar" +
+                    "\n[3] - Listar" +
+                    "\n[4] - Atualizar" +
+                    "\n[5] - Remover" +
+                    "\n[8] - Init" +
+                    "\n[9] - Sair");
 
                 try
                 {
@@ -54,64 +62,97 @@ namespace Projeto_Teste.src.view
                         case ConsoleKey.D1:
                             Console.Clear();
 
+                            Console.Write("ID (necessario): ");
+                            id = Int32.Parse(Console.ReadLine()!);
+
+                            Person person = control.Find(id);
+
+                            _printPerson(person);
+
+                            Console.ReadKey();
+
+                            break;
+                        case ConsoleKey.D2:
+                            Console.Clear();
+
                             Console.Write("Nome: ");
-                            name = Console.ReadLine();
+                            name = Console.ReadLine()!;
 
                             Console.Write("Sobrenome: ");
-                            lastName = Console.ReadLine();
+                            lastName = Console.ReadLine()!;
 
                             Console.Write("Documento: ");
-                            document = Console.ReadLine();
+                            document = Console.ReadLine()!;
 
                             Console.Write("Endereco: ");
-                            address = Console.ReadLine();
+                            address = Console.ReadLine()!;
 
                             Console.Write("Idade: ");
-                            age = Int32.Parse(Console.ReadLine());
+                            age = Int32.Parse(Console.ReadLine()!);
 
                             Console.Write("Telefone: ");
-                            phoneNumber = Console.ReadLine();
+                            phoneNumber = Console.ReadLine()!;
 
                             birthDate = DateTime.Now;
 
                             control.Create(name, lastName, document, address, age, phoneNumber, birthDate);
                             break;
-                        case ConsoleKey.D2:
+                        case ConsoleKey.D3:
                             Console.Clear();
 
                             List<Person> pessoas = control.Index();
                             if (pessoas != null)
                             {  
                                 foreach (Person pessoa in pessoas) _printPerson(pessoa);
-                                Console.ReadKey();
                             }
+                            Console.ReadKey();
                             break;
-                        case ConsoleKey.D3:
+                        case ConsoleKey.D4:
                             Console.Clear();
 
                             Console.Write("ID (necessario): ");
-                            id = Int32.Parse(Console.ReadLine());
+                            id = Int32.Parse(Console.ReadLine()!);
 
                             Console.Write("Nome: ");
-                            name = Console.ReadLine();
+                            name = Console.ReadLine()!;
 
                             Console.Write("Sobrenome: ");
-                            lastName = Console.ReadLine();
+                            lastName = Console.ReadLine()!;
 
                             Console.Write("Documento: ");
-                            document = Console.ReadLine();
+                            document = Console.ReadLine()!;
 
                             Console.Write("Endereco: ");
-                            address = Console.ReadLine();
+                            address = Console.ReadLine()!;
 
                             Console.Write("Idade: ");
-                            age = Int32.Parse(Console.ReadLine());
+                            age = Int32.Parse(Console.ReadLine()!);
 
                             Console.Write("Telefone: ");
-                            phoneNumber = Console.ReadLine();
+                            phoneNumber = Console.ReadLine()!;
 
                             birthDate = DateTime.Now;
+
+                            control.Update(id, name, lastName, document, address, age, phoneNumber, birthDate);
+
+                            Console.WriteLine("Atualizado com sucesso!");
+                            Console.ReadKey();
                             break;
+
+                        case ConsoleKey.D5:
+
+                            Console.Clear();
+
+                            Console.Write("ID (necessario): ");
+                            id = Int32.Parse(Console.ReadLine()!);
+
+                            control.Delete(id);
+
+                            Console.WriteLine("Deletado com sucesso!");
+                            Console.ReadKey();
+
+                            break;
+
                         case ConsoleKey.D8:
                             control.Create("Alvaro", "Lima", "32233", "Rua 2", 23, "33223322", DateTime.Now);
                             control.Create("Lucas", "Souza", "12233", "Rua A", 24, "33223332", DateTime.Now);
