@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.Data.Sqlite;
+using Microsoft.VisualBasic;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Projeto_Teste.src.db
@@ -149,6 +150,68 @@ namespace Projeto_Teste.src.db
                 {
                     try
                     {
+                        command.Parameters.AddWithValue("@Name", person.Name);
+                        command.Parameters.AddWithValue("@LastName", person.LastName);
+                        command.Parameters.AddWithValue("@Document", person.Document);
+                        command.Parameters.AddWithValue("@Address", person.Address);
+                        command.Parameters.AddWithValue("@Age", person.Age);
+                        command.Parameters.AddWithValue("@PhoneNumber", person.PhoneNumber);
+                        command.Parameters.AddWithValue("@BirthDate", person.BirthDate);
+
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception err)
+                    {
+                        Console.WriteLine("ERROR: " + err);
+                    }
+                }
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (SqliteConnection connection = new SqliteConnection(_path))
+            {
+                connection.Open();
+
+                string sql = "DELETE FROM person WHERE id = @Id";
+
+                using (SqliteCommand command = new SqliteCommand(sql, connection))
+                {
+                    try
+                    {
+                        command.Parameters.AddWithValue("@Id", id);
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception err)
+                    {
+                        Console.WriteLine("ERROR: " + err);
+                    }
+                }
+            }
+        }
+
+        public void Update(Person person)
+        {
+            using (SqliteConnection connection = new SqliteConnection(_path))
+            {
+                connection.Open();
+
+                string sql = "UPDATE person " +
+                             "SET name = @Name, " +
+                                 "lastname = @LastName, " +
+                                 "document = @Document, " +
+                                 "address = @Address, " +
+                                 "age = @Age, " +
+                                 "phonenumber = @PhoneNumber, " +
+                                 "birthdate = @BirthDate " +
+                             "WHERE id = @Id;";
+
+                using (SqliteCommand command = new SqliteCommand(sql, connection))
+                {
+                    try
+                    {
+                        command.Parameters.AddWithValue("@Id", person.Id);
                         command.Parameters.AddWithValue("@Name", person.Name);
                         command.Parameters.AddWithValue("@LastName", person.LastName);
                         command.Parameters.AddWithValue("@Document", person.Document);

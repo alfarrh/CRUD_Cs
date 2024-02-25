@@ -12,13 +12,11 @@ namespace Projeto_Teste.src.control
 {
     class PersonController
     {
-        private SQLite _dbSQL;
-        private DataBase _db;
+        private SQLite _db;
 
         public PersonController()
         {
-            this._db = TestView.db;
-            this._dbSQL = new SQLite();
+            this._db = new SQLite();
         }
         
         //Create
@@ -35,10 +33,10 @@ namespace Projeto_Teste.src.control
         {
             Person person = new Person(name, lastName, document, address, age, phoneNumber, birthDate);
 
-            Person query = _dbSQL.Find(document, where: "document");
+            Person query = _db.Find(document, where: "document");
             if (query != null) throw new Exception("Pessoa já cadastrada.");
 
-            else _dbSQL.Insert(person);
+            else _db.Insert(person);
         }
 
         //Read
@@ -46,7 +44,7 @@ namespace Projeto_Teste.src.control
         {
             //Person person = _db.FindById(id);
             
-            Person person = _dbSQL.Find(id, where:"id");
+            Person person = _db.Find(id, where:"id");
 
             if (person == null) throw new Exception("Pessoa não cadastrada.");
             else return person;
@@ -73,7 +71,10 @@ namespace Projeto_Teste.src.control
         //Delete
         public void Delete( int id )
         {
-            _db.Delete(id);
+            Person person = _db.Find(id, where: "id");
+
+            if (person == null) throw new Exception("Pessoa não cadastrada.");
+            else _db.Delete(id);
         }
 
         //List
@@ -81,7 +82,7 @@ namespace Projeto_Teste.src.control
         {
             List<Person> people = new List<Person>();
 
-            return people = people == null ? throw new Exception("Não existem cadastros.") : _dbSQL.FindMany();
+            return people = people == null ? throw new Exception("Não existem cadastros.") : _db.FindMany();
         }
     }
 }

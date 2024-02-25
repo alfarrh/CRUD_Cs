@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using Projeto_Teste.src.db;
 using Projeto_Teste.src.control;
 
 namespace Projeto_Teste.src.view
 {
     class TestView
     {
-        public static DataBase db = new DataBase();
         private static void _printPerson(Person person)
         {
             Console.WriteLine(
