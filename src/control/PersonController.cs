@@ -54,7 +54,9 @@ namespace Projeto_Teste.src.control
         //Read
         public Person Find(int id)
         {
-            Person person = _db.FindById(id);
+            //Person person = _db.FindById(id);
+            SQLite db = new SQLite();
+            Person person = db.FindById(id);
 
             if (person == null) throw new Exception("Pessoa não cadastrada.");
             else return person;

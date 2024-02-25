@@ -18,6 +18,22 @@ namespace Projeto_Teste
         private string _phoneNumber;
         private DateTime _birthDate;
 
+        public Person()
+        {
+
+        }
+        public Person(int id, string name, string lastName, string document, string address, int age, string phoneNumber, DateTime birthDate)
+        {
+            _id = id;
+            _name = name;
+            _lastName = lastName;
+            _document = document;
+            _address = address;
+            _age = age;
+            _phoneNumber = phoneNumber;
+            _birthDate = birthDate;
+        }
+
         public Person(string name, string lastName, string document, string address, int age, string phoneNumber, DateTime birthDate)
         {
             _name = name;
