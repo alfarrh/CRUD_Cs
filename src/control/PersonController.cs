@@ -12,11 +12,13 @@ namespace Projeto_Teste.src.control
 {
     class PersonController
     {
+        private SQLite _dbSQL;
         private DataBase _db;
 
         public PersonController()
         {
             this._db = TestView.db;
+            this._dbSQL = new SQLite();
         }
         
         //Create
@@ -24,39 +26,27 @@ namespace Projeto_Teste.src.control
             (
                 string name,
                 string lastName,
-                string documento,
-                string endereco,
-                int idade,
-                string telefone,
-                DateTime dataNasc
+                string document,
+                string address,
+                int age,
+                string phoneNumber,
+                DateTime birthDate
             )
         {
-            Person pessoa = new Person(name, lastName, documento, endereco, idade, telefone, dataNasc);
+            Person person = new Person(name, lastName, document, address, age, phoneNumber, birthDate);
 
-            try
-            {
-                /*
-                Pessoa pessoa = await db.FindByDocumento(documento);
-                */
+            Person query = _dbSQL.Find(document, where: "document");
+            if (query != null) throw new Exception("Pessoa já cadastrada.");
 
-                Person consulta = _db.FindByDocument(documento);
-                if (consulta != null) throw new Exception("Pessoa já cadastrada.");
-
-                else _db.CadastrarPessoa(pessoa);
-            }
-            catch (Exception err)
-            {
-                Console.WriteLine("Erro ao cadastrar: " + err);
-            }
-
+            else _dbSQL.Insert(person);
         }
 
         //Read
         public Person Find(int id)
         {
             //Person person = _db.FindById(id);
-            SQLite db = new SQLite();
-            Person person = db.FindById(id);
+            
+            Person person = _dbSQL.Find(id, where:"id");
 
             if (person == null) throw new Exception("Pessoa não cadastrada.");
             else return person;
@@ -75,9 +65,7 @@ namespace Projeto_Teste.src.control
                 DateTime dataNasc
             )
         {
-            Person person = new Person(name,lastName, documento, endereco,idade, telefone,dataNasc);
-
-            person.Id = id;
+            Person person = new Person(id, name,lastName, documento, endereco,idade, telefone,dataNasc);
 
             _db.Update(person);
         }
@@ -89,18 +77,11 @@ namespace Projeto_Teste.src.control
         }
 
         //List
-            public List<Person> Index()
+        public List<Person> List()
         {
-            try
-            {
-                List<Person> lista = _db.List();
-                return lista;
-            }
-            catch (Exception err)
-            {
-                Console.WriteLine("Erro ao listar: " + err);
-                return null;
-            }
+            List<Person> people = new List<Person>();
+
+            return people = people == null ? throw new Exception("Não existem cadastros.") : _dbSQL.FindMany();
         }
     }
 }

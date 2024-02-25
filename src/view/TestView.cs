@@ -100,7 +100,7 @@ namespace Projeto_Teste.src.view
                         case ConsoleKey.D3:
                             Console.Clear();
 
-                            List<Person> pessoas = control.Index();
+                            List<Person> pessoas = control.List();
                             if (pessoas != null)
                             {  
                                 foreach (Person pessoa in pessoas) _printPerson(pessoa);
