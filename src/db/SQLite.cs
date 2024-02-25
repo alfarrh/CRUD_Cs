@@ -10,7 +10,7 @@ using Microsoft.Data.Sqlite;
 using Microsoft.VisualBasic;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace Projeto_Teste.src.db
+namespace Crud_Cs.src.db
 {
     class SQLite
     {

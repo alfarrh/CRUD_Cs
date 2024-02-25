@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Projeto_Teste.src.control;
+using Crud_Cs.src.control;
 
-namespace Projeto_Teste.src.view
+namespace Crud_Cs.src.view
 {
     class TestView
     {

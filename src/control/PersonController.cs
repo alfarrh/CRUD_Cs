@@ -5,10 +5,10 @@ using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
-using Projeto_Teste.src.db;
-using Projeto_Teste.src.view;
+using Crud_Cs.src.db;
+using Crud_Cs.src.view;
 
-namespace Projeto_Teste.src.control
+namespace Crud_Cs.src.control
 {
     class PersonController
     {

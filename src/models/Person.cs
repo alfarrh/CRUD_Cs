@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Projeto_Teste
+namespace Crud_Cs
 {
     class Person
     {
