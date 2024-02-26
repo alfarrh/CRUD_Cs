@@ -105,7 +105,7 @@ namespace Crud_Cs.src.db
 
                 List<Person> list = new List<Person>();
 
-                if(parameter != null) { sql = "SELECT * FROM person WHERE " + where + " = @value"; ; }
+                if(parameter != null) { sql = "SELECT * FROM person WHERE " + where + " LIKE %@value%"; ; }
                 else { sql = "SELECT * FROM person"; }
                 
                 using (SqliteCommand command = new SqliteCommand(sql, connection))

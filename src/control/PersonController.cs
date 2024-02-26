@@ -42,12 +42,18 @@ namespace Crud_Cs.src.control
         //Read
         public Person Find(int id)
         {
-            //Person person = _db.FindById(id);
-            
             Person person = _db.Find(id, where:"id");
 
             if (person == null) throw new Exception("Pessoa não cadastrada.");
             else return person;
+        }
+
+        public List<Person> Find(string name)
+        {
+            List<Person> people = _db.FindMany(name, where: "name");
+
+            if (people == null) throw new Exception("Pessoa não cadastrada.");
+            else return people;
         }
 
         //Update
@@ -78,11 +84,11 @@ namespace Crud_Cs.src.control
         }
 
         //List
-        public List<Person> List()
+        public List<Person> List(string query = null)
         {
             List<Person> people = new List<Person>();
 
-            return people = people == null ? throw new Exception("Não existem cadastros.") : _db.FindMany();
+            return people = people == null ? throw new Exception("Não existem cadastros.") : _db.FindMany(query, "name");
         }
     }
 }

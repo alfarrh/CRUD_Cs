@@ -38,14 +38,18 @@
             <WrapPanel Grid.Column="1"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Right">
-                <Button Width="110" Margin="10 0">Cadastrar</Button>
+                <Button Width="110" Margin="10 0" Command="{Binding OpenSaveCommand}">Cadastrar</Button>
+                <Button Width="110" Margin="10 0" Command="{Binding FindCommand}">Atualizar</Button>
                 <Button Width="110" Margin="10 0">Alterar</Button>
-                <Button Width="110" Margin="10 0 0 0">Deletar</Button>
+                <Button Width="110" Margin="10 0 0 0" Command="{Binding DeleteCommand}">Deletar</Button>
             </WrapPanel>
         </Grid>
 
         <Grid Grid.Row="1" Margin="50 0 50 50">
-            <DataGrid AutoGenerateColumns="True"/>
+            <DataGrid 
+                SelectedItem="{Binding SelectedRow}"
+                ItemsSource="{Binding Path=Itens}" 
+                AutoGenerateColumns="True"/>
         </Grid>
     </Grid>
 </Window>
