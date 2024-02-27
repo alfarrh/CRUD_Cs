@@ -10,17 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="bkp\**" />
-    <Compile Remove="Crud_Cs\**" />
-    <EmbeddedResource Remove="bkp\**" />
-    <EmbeddedResource Remove="Crud_Cs\**" />
-    <None Remove="bkp\**" />
-    <None Remove="Crud_Cs\**" />
-    <Page Remove="bkp\**" />
-    <Page Remove="Crud_Cs\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.2" />
     <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="8.0.2" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />

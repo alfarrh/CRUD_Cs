@@ -95,7 +95,7 @@ namespace Crud_Cs.src.db
             }
         }
         
-        public List<Person> FindMany(string parameter = null)
+        public List<Person> FindMany(string parameter = null, string where = null)
         {
             string sql;
 
@@ -105,7 +105,7 @@ namespace Crud_Cs.src.db
 
                 List<Person> list = new List<Person>();
 
-                if(parameter != null) { sql = "SELECT * FROM person WHERE name LIKE @value"; ; }
+                if(parameter != null) { sql = "SELECT * FROM person WHERE " + where + " LIKE %@value%"; ; }
                 else { sql = "SELECT * FROM person"; }
                 
                 using (SqliteCommand command = new SqliteCommand(sql, connection))

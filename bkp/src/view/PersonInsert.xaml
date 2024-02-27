@@ -6,8 +6,7 @@
         xmlns:local="clr-namespace:Crud_Cs.src.view"
         mc:Ignorable="d"
         Title="Cadastro" Height="500" Width="410"
-        ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
-        WindowStartupLocation="CenterScreen">
+        ResizeMode="NoResize" WindowStyle="SingleBorderWindow">
     <Grid Margin="20">
         <StackPanel>
             <TextBlock>Nome</TextBlock>
@@ -23,11 +22,11 @@
             <TextBlock>Telefone</TextBlock>
             <TextBox Text="{Binding TextPhoneNumber }" Margin="0 4 0 10"></TextBox>
             <TextBlock>Data de Nascimento</TextBlock>
-            <DatePicker DisplayDateStart="1920-01-01"
-                        DisplayDateEnd="2023-12-31"
+            <DatePicker DisplayDateStart="2022-01-01"
+                        DisplayDateEnd="2024-12-31"
                         SelectedDate="{Binding TextBirthDate}" 
                         Margin="0 4 0 10" />
-            <Button Content="{Binding ButtonText}"  Command="{Binding SaveCommand}"></Button>
+            <Button Command="{Binding SaveCommand}">Salvar</Button>
         </StackPanel>
     </Grid>
 </Window>

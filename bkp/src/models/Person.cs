@@ -22,7 +22,6 @@ namespace Crud_Cs
         {
 
         }
-
         public Person(int id, string name, string lastName, string document, string address, int age, string phoneNumber, DateTime birthDate)
         {
             _id = id;

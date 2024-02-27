@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using Crud_Cs.src.db;
 using Crud_Cs.src.view;
-using Crud_Cs.ViewModels;
 
 namespace Crud_Cs.src.control
 {
@@ -33,24 +31,12 @@ namespace Crud_Cs.src.control
                 DateTime birthDate
             )
         {
-            string phoneRegex = @"\b([0-9]{2})?[9][0-9]{4}[-]?[0-9]{4}\b";
-            Match match = Regex.Match(phoneNumber, phoneRegex);
+            Person person = new Person(name, lastName, document, address, age, phoneNumber, birthDate);
 
-            if (match.Success)
-            {
-                Person person = new Person(name, lastName, document, address, age, phoneNumber, birthDate);
+            Person query = _db.Find(document, where: "document");
+            if (query != null) throw new Exception("Pessoa já cadastrada.");
 
-                Person query = _db.Find(document, where: "document");
-                if (query != null) throw new Exception("Pessoa já cadastrada.");
-
-                else _db.Insert(person);
-            }
-            else throw new Exception("Numero de telefone invalido. " +
-                                     "\nTente como os seguintes exemplos:" +
-                                     "\n44912345678" +
-                                     "\n1291234-5678" +
-                                     "\n91234-5678");
-            
+            else _db.Insert(person);
         }
 
         //Read
@@ -64,7 +50,7 @@ namespace Crud_Cs.src.control
 
         public List<Person> Find(string name)
         {
-            List<Person> people = _db.FindMany(name);
+            List<Person> people = _db.FindMany(name, where: "name");
 
             if (people == null) throw new Exception("Pessoa não cadastrada.");
             else return people;
@@ -76,14 +62,14 @@ namespace Crud_Cs.src.control
                 int id,
                 string name,
                 string lastName,
-                string document,
-                string address,
-                int age,
-                string phoneNumber,
-                DateTime birthDate
+                string documento,
+                string endereco,
+                int idade,
+                string telefone,
+                DateTime dataNasc
             )
         {
-            Person person = new Person(id, name, lastName, document, address,age, phoneNumber,birthDate);
+            Person person = new Person(id, name,lastName, documento, endereco,idade, telefone,dataNasc);
 
             _db.Update(person);
         }
@@ -102,10 +88,7 @@ namespace Crud_Cs.src.control
         {
             List<Person> people = new List<Person>();
 
-            people = _db.FindMany(query);
-            if (people == null) throw new Exception("Não existem cadastros.") ;
-
-            return people;
+            return people = people == null ? throw new Exception("Não existem cadastros.") : _db.FindMany(query, "name");
         }
     }
 }

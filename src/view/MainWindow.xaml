@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Cadastro" Height="720" Width="1280"
         MinWidth="1024" MinHeight="576"
-        WindowState="Maximized">
+        WindowStartupLocation="CenterScreen">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -32,24 +32,48 @@
                     <ColumnDefinition Width="0.55*"/>
                 </Grid.ColumnDefinitions>
                 
-                <TextBox BorderThickness="3" HorizontalAlignment="Stretch" MinWidth="100" Margin="0 0 10 0"/>
-                <Button Grid.Column="1"  Width="110">Pesquisar</Button>
+                <TextBox Text="{Binding TextSearch}" SelectedText="true" BorderThickness="3" HorizontalAlignment="Stretch" MinWidth="100" Margin="0 0 10 0"/>
+                <Button Grid.Column="1" Command="{Binding FindCommand}" Width="110">Pesquisar</Button>
             </Grid>
-            <WrapPanel Grid.Column="1"
+            <Grid Grid.Column="1"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Right">
-                <Button Width="110" Margin="10 0" Command="{Binding OpenSaveCommand}">Cadastrar</Button>
-                <Button Width="110" Margin="10 0" Command="{Binding FindCommand}">Atualizar</Button>
-                <Button Width="110" Margin="10 0">Alterar</Button>
-                <Button Width="110" Margin="10 0 0 0" Command="{Binding DeleteCommand}">Deletar</Button>
-            </WrapPanel>
+                       HorizontalAlignment="Stretch">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*" MinWidth="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <WrapPanel Grid.Column="0"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Stretch">
+                    <Button Width="90" Margin="10 10" Command="{Binding OpenSaveCommand}">Cadastrar</Button>
+                    <Button Width="90" Margin="10 10" Command="{Binding OpenUpdateCommand}">Alterar</Button>
+                    <Button Width="90" Margin="10 10 0 10" Command="{Binding DeleteCommand}">Deletar</Button>
+                </WrapPanel>
+                
+                <Button Grid.Column="1" 
+                        HorizontalAlignment="Right" 
+                        Margin="10 10 0 10" 
+                        Command="{Binding FindCommand}"
+                        Background="White"
+                        BorderThickness="3">
+                    <Image Source="..\..\resources\images\update_icon.png"
+                           Width="25"
+                           Height="25"/>
+                </Button>
+            </Grid>
         </Grid>
 
         <Grid Grid.Row="1" Margin="50 0 50 50">
-            <DataGrid 
-                SelectedItem="{Binding SelectedRow}"
+            <DataGrid
+                Name="DG"
+                ColumnWidth="145"
+                SelectedItem="{Binding SelectedRow, TargetNullValue={x:Static CollectionView.NewItemPlaceholder}}"
                 ItemsSource="{Binding Path=Itens}" 
-                AutoGenerateColumns="True"/>
+                AutoGenerateColumns="True"
+                IsReadOnly="true">
+            </DataGrid>
         </Grid>
     </Grid>
 </Window>
